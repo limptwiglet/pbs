@@ -1,30 +1,23 @@
-import { State, Player, PlayerState, BreakoutModes } from "../common/types";
-import weightedRandom from "../utils/weighted-random";
+import { State, Player, PlayerState, BreakoutModes, Team } from "../common/types";
+import playerHitsPlayer, { HasHit } from "../utils/player-hits-player";
 
 export default function breakout(state: State) {
-  // Find all moving players as flat array
-  // Find all shooting players
-  //  Shooting players are grouped by team and reversed [[Team1Players], [Team0Players]]
-  // ERROR
-  // This should just be players shooting at any other player, they pick a player to shoot at
-  // if the player is moving thye get a modifier based on their speed
-  const movingPlayers = state.teams.map((team) => team.players.filter(p => p.breakoutMode === BreakoutModes.Moving)).flat();
   const shootingPlayers = state.teams.map(team => team.players.filter(p => p.breakoutMode === BreakoutModes.Shooting)).reverse();
 
-  // Splice together the shooters and movers
-  // TO-DO: Ensure that once a shooter has fired at a player, can they shoot again? Perhaps skill based
-  let moversAndShooters: Array<[Player, Player[]]> = movingPlayers.map((player, i) => ([player, shootingPlayers[i] ?? []]));
+  teamShootAtOtherTeam(state.teams[0], state.teams[1]);
+  teamShootAtOtherTeam(state.teams[1], state.teams[0]);
+};
 
-  moversAndShooters.forEach(([mover, shooters]) => {
-    const playerHit = weightedRandom([mover.stats.speed, ...shooters.map(s => s.stats.laning)]);
+const teamShootAtOtherTeam = (shootingTeam: Team, targetTeam: Team) => {
+  shootingTeam.players.filter(p => p.breakoutMode === BreakoutModes.Shooting).forEach((player) => {
+    let target = targetTeam.players[Math.floor(Math.random() * targetTeam.players.length)];
 
-    console.log(`Player "${mover.name}" is attempting to move`);
+    const hasHit = playerHitsPlayer(player, target);
 
-    if (playerHit) {
-      console.log(`Player "${mover.name}" moving was shot by "${shooters[playerHit - 1].name}"`);
-      mover.state = PlayerState.Out;
+    if (hasHit === HasHit.Hit) {
+      console.log(`Player ${player.name} HIT ${target.name}`);
     } else {
-      console.log(`Player "${mover.name}" moved safely`);
+      console.log(`Player ${player.name} MISSED ${target.name}`);
     }
   });
 };
