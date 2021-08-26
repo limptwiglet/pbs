@@ -1,17 +1,6 @@
+import { SetupTeam, State, Status, Team } from "./common/types";
+import breakout from "./states/breakout";
 import weightedRandom from "./utils/weighted-random";
-
-interface SetupTeam extends Team {
-  initiative: number;
-}
-
-enum Status {
-  Start
-}
-
-interface State {
-  status: Status;
-  teams: SetupTeam[];
-}
 
 const start = (teams: Team[]) => {
   let setupTeams = setup(teams);
@@ -38,20 +27,7 @@ const setup = (teams: Team[]): SetupTeam[] => {
 };
 
 const tick = (state: State) => {
-  // Move player
-  const playerMoving = state.teams[0].players[0];
-  console.log('Player moving: ', playerMoving.name);
-
-  const playerShooting = state.teams[1].players[0];
-
-  const playerHit = weightedRandom([playerMoving.stats.speed, playerShooting.stats.laning]);
-
-  if (playerHit) {
-    state.teams[0].players[0].out = true;
-    console.log('Player shot moving', playerMoving.name);
-  } else {
-    console.log('Player moved successfully');
-  }
+  breakout(state);
 };
 
 const end = () => { };
