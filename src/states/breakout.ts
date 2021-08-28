@@ -1,4 +1,4 @@
-import { State, BreakoutModes, Team } from "../common/types";
+import { State, BreakoutModes, Team, PlayerState } from "../common/types";
 import playerHitsPlayer, { HasHit } from "../utils/player-hits-player";
 
 export default function breakout(state: State) {
@@ -18,6 +18,7 @@ const teamShootAtOtherTeam = (shootingTeam: Team, targetTeam: Team) => {
       const hasHit = playerHitsPlayer(player, target);
 
       if (hasHit === HasHit.Hit) {
+        player.state = PlayerState.Out;
         console.log(`Player ${player.name} HIT ${target.name}`);
       } else {
         console.log(`Player ${player.name} MISSED ${target.name}`);

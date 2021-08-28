@@ -1,9 +1,9 @@
 import { Player } from "../common/types";
-import weightedRandom from "./weighted-random";
+import { MAX_STAT_LEVEL } from "../common/constants";
 
 export enum HasHit {
   Hit,
-  Miss
+  Miss,
 }
 
 // Calculate if another play hits another
@@ -11,12 +11,22 @@ export enum HasHit {
 // Distance modifier
 // Shooter moving modifier
 // Moving target speed modifier
-export default function playerHitsPlayer(shooter: Player, target: Player): HasHit {
-  const result = weightedRandom([target.stats.speed, shooter.stats.laning]);
+export default function playerHitsPlayer(
+  shooter: Player,
+  target: Player
+): HasHit {
+  const maxHitChance = 0.6;
+  const maxTargetModifier = 0.1;
 
-  if (result === 0) {
+  const shooterAbility = (maxHitChance / MAX_STAT_LEVEL) * shooter.stats.laning;
+  const targetModifiter =
+    -(maxTargetModifier / MAX_STAT_LEVEL) * target.stats.speed;
+
+  const rand = Math.random();
+
+  if (rand < shooterAbility + targetModifiter) {
+    return HasHit.Hit;
+  } else {
     return HasHit.Miss;
   }
-
-  return HasHit.Hit;
 }

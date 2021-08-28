@@ -5,11 +5,11 @@ const team1: Team = {
     {
       name: "T1 P 1",
       state: PlayerState.Ready,
-      breakoutMode: BreakoutModes.Moving,
+      breakoutMode: BreakoutModes.Shooting,
       stats: {
-        speed: 6,
+        speed: 1,
         initiative: 10,
-        laning: 5,
+        laning: 10,
       },
     },
     {
@@ -17,9 +17,9 @@ const team1: Team = {
       state: PlayerState.Ready,
       breakoutMode: BreakoutModes.Shooting,
       stats: {
-        speed: 6,
+        speed: 1,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
     {
@@ -27,9 +27,9 @@ const team1: Team = {
       state: PlayerState.Ready,
       breakoutMode: BreakoutModes.Shooting,
       stats: {
-        speed: 6,
+        speed: 1,
         initiative: 10,
-        laning: 5,
+        laning: 8,
       },
     },
     {
@@ -37,9 +37,9 @@ const team1: Team = {
       state: PlayerState.Ready,
       breakoutMode: BreakoutModes.Shooting,
       stats: {
-        speed: 6,
+        speed: 1,
         initiative: 10,
-        laning: 5,
+        laning: 10,
       },
     },
     {
@@ -47,9 +47,9 @@ const team1: Team = {
       state: PlayerState.Ready,
       breakoutMode: BreakoutModes.Shooting,
       stats: {
-        speed: 6,
+        speed: 1,
         initiative: 10,
-        laning: 5,
+        laning: 10,
       },
     },
   ],
@@ -62,9 +62,9 @@ const team2: Team = {
       breakoutMode: BreakoutModes.Moving,
       state: PlayerState.Ready,
       stats: {
-        speed: 6,
+        speed: 10,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
     {
@@ -72,9 +72,9 @@ const team2: Team = {
       breakoutMode: BreakoutModes.Moving,
       state: PlayerState.Ready,
       stats: {
-        speed: 6,
+        speed: 10,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
     {
@@ -82,9 +82,9 @@ const team2: Team = {
       breakoutMode: BreakoutModes.Shooting,
       state: PlayerState.Ready,
       stats: {
-        speed: 6,
+        speed: 10,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
     {
@@ -92,9 +92,9 @@ const team2: Team = {
       breakoutMode: BreakoutModes.Shooting,
       state: PlayerState.Ready,
       stats: {
-        speed: 6,
+        speed: 10,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
     {
@@ -102,9 +102,9 @@ const team2: Team = {
       breakoutMode: BreakoutModes.Shooting,
       state: PlayerState.Ready,
       stats: {
-        speed: 6,
+        speed: 10,
         initiative: 10,
-        laning: 5,
+        laning: 1,
       },
     },
   ],
